@@ -21,4 +21,4 @@ const linearCongruentialMethod = (a, c, m, X0, totalNumbers) => {
   console.log(rand0to1);
 };
 
-linearCongruentialMethod(18, 43, 90, 27, 50);
+linearCongruentialMethod(18, 43, 2 ** 32, 27, 50);
