@@ -44,12 +44,12 @@ class PathLinkedList:
             print("invalid index")
 
     def print(self):
-        print(self)
-        # currentNode = self.head
-        # while currentNode:
-        #     print(currentNode.data, end=" ")
-        #     currentNode = currentNode.next
-        # print("")
+        currentNode = self.head
+        while currentNode:  # Traverse the linked list
+            print("-> ", end="")
+            print(currentNode.data)  # Print each node's data
+            currentNode = currentNode.next
+        print("")  # Print a newline at the end
 
     def __str__(self):  # Override str() for better printing
         result = []
@@ -60,8 +60,8 @@ class PathLinkedList:
         return " -> ".join(result) if result else "Empty"
 
 
-edges = ["a", "b", "c"]
-Weight = [[0, 4, 11], [6, 0, 2], [3, math.inf, 0]]
+edges = ["a", "b", "c", "d"]
+Weight = [[0, 4, 11, 1], [6, 0, 2, 3], [3, math.inf, 0, 1], [1, 3, 7, 9]]
 print(Weight)
 
 # for edge in edges: *ERR - 1
@@ -77,12 +77,13 @@ for k in range(len(edges)):  # through this edge
     for i in range(len(edges)):  # starting edge
         for j in range(len(edges)):  # ending edge
             if i == j:
-                Weight[i][j] = 0
+                # Weight[i][j] = 0 redundant
+                pass
             else:
                 new_distance = Weight[i][k] + Weight[k][j]
                 if new_distance < Weight[i][j]:
                     Weight[i][j] = new_distance
-                    paths[i].insertAtBeginning(edges[j])
+                    paths[i].insertAtBeginning(edges[k])
 
                 # Weight[i][j] = min(Weight[i][j], Weight[i][k] + Weight[k][j])
                 # paths[i].insertAtIndex(Weight[i][j], j - 1) #*ERR - 1 didn't work
@@ -92,9 +93,8 @@ print("The Shortest Path Matrix is:")
 # print(Weight)
 for row in Weight:
     print(row)
-print("The Shortest Path is: ")
-for index, path in enumerate(
-    paths
-):  # NOTE adds an index to each element in the paths list while iterating
-    print(f"From {edges[index]}:", end="")
+print("The Shortest Path is:")
+for i, path in enumerate(paths):
+    full_path = [edges[i]]  # Start with the source vertex
+    print(f"{edges[i]} ", end="")
     path.print()
