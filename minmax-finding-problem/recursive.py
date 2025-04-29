@@ -32,3 +32,10 @@ def MinMax(A, f_index, l_index, max, min):
 A = [1, 2, 3, 9, 5, 3, 8, 5, 100, 2, -2, 45, 23, -3, 300, 400, 500]
 max, min = MinMax(A, 0, len(A) - 1, None, None)
 print("max: ", max, "min: ", min)
+
+
+# NOTE
+"""
+T(n) = 2T(n/2) + O(1)
+T(n) = O(n), same as sequential, iterative one. That means we will go with iterative one.
+"""
